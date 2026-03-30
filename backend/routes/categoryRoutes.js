@@ -12,7 +12,7 @@ router.get('/', authMiddleware, protect, async (req, res) => {
   }
 });
 
-router.post('/', protect, async (req, res) => {
+router.post('/', authMiddleware, protect, async (req, res) => {
   try {
     const { name, description } = req.body;
     const category = await Category.create({
@@ -27,7 +27,7 @@ router.post('/', protect, async (req, res) => {
   }
 });
 
-router.delete('/:id', protect, async (req, res) => {
+router.delete('/:id', authMiddleware, protect, async (req, res) => {
   try {
     const category = await Category.findById(req.params.id);
     if (!category) {
