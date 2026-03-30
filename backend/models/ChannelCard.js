@@ -8,7 +8,6 @@ const channelCardSchema = new mongoose.Schema(
     },
     youtubeUrl: {
       type: String,
-      required: true,
     },
     description: {
       type: String,
