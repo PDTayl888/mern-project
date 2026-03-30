@@ -43,3 +43,5 @@ router.delete('/:id', protect, async (req, res) => {
     res.status(500).json({ message: 'FAILED TO DELETE' });
   }
 });
+
+module.exports = router;
