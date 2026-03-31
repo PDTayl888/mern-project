@@ -50,3 +50,47 @@ router.post("/", authMiddleware, async (req, res) => {
     res.status(400).json({ message: "CREATE FAILED" });
   }
 });
+
+router.put('/:id', protect, async (req, res) => {
+  try {
+    const card = await ChannelCard.findById(req.params.id);
+
+    if (!card) {
+      return res.status(404).json({ message: 'CARD NOT FOUND' });
+    }
+    if (card.user.toString() !== req.user.id) {
+      return res.status(401).json({ message: 'UPDATE NOT AUTHORIZED' });
+    }
+    const updatedCard = await ChannelCard.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+
+    res.status(200).json(updatedCard);
+  } catch (error) {
+    res.status(500).json({ message: 'UPDATE FAILED' });
+  }
+});
+
+router.delete('/:id', protect, async (req, res) => {
+  try {
+const card = await ChannelCard.findById(req.params.id);
+
+    if (!card) {
+      return res.status(404).json({ message: 'CARD NOT FOUND' });
+    }
+
+    if (card.user.toString() !== req.user.id) {
+      return res.status(401).json({ message: 'NOT AUTHORIZED' });
+    }
+    await card.deleteOne();
+
+    res.status(200).json({ id: req.params.id, message: 'SUCCESSFUL CARD DELETE' });
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to delete card' });
+  }
+});
+
+
+module.exports = router;
