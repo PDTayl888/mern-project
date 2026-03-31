@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import { fetch } from "../utils/apiClient";
 
 const useFetch = (url) => {
   const [data, setData] = useState(null);
@@ -11,29 +11,23 @@ const useFetch = (url) => {
 
     const fetchData = async () => {
       try {
-        setLoading(true);
-
-        const response = await axios.get(url, { signal: controller.signal });
-
-        setData(response.data);
+        const result = await fetch(url, { signal: controller.signal });
+        setData(result);
         setError(null);
-        setLoading(false);
       } catch (error) {
-        if (axios.isCancel(error)) {
-          console.log("CANCEL");
+        if (error.name === "AbortError") {
+          console.log("ERROR");
         } else {
-          setError(error.response?.data?.message);
-          setLoading(false);
+          setError(error.message);
         }
-      } 
+      } finally {
+        setLoading(false);
+      }
     };
 
-        if (url) {
-      fetchData();
-    }
+    fetchData();
 
-
-     return () => {
+    return () => {
       controller.abort();
     };
   }, [url]);
