@@ -5,5 +5,8 @@ import ChannelCard from '../components/ChannelCard';
 
 const CategoryDetails = () => {
     const { categoryId } = useParams();
-    const { data: cards, }
+
+    return (
+        
+    )
 }
