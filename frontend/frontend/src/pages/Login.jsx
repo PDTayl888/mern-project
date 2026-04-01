@@ -8,6 +8,7 @@ const Login = () => {
 
   const [searchParams] = useSearchParams();
   const [formData, setFormData] = useState({ email: "", password: "" });
+  const [errorMsg, setErrorMsg] = useState("");
 
   useEffect(() => {
     const token = searchParams.get("token");
@@ -36,6 +37,7 @@ const Login = () => {
       navigate("/");
     } catch (error) {
       console.log(error);
+      setErrorMsg(error.message);
     }
   };
 
@@ -43,7 +45,7 @@ const Login = () => {
     <main>
       <h1>Log in:</h1>
 
-      
+      {errorMsg && <div>{errorMsg}</div>}
 
       <form onSubmit={handleSubmit}>
         <input
