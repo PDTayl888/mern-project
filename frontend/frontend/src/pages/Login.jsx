@@ -1,17 +1,41 @@
-import { useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useState, useEffect, useContext } from "react";
+import { useNavigate, useSearchParams, Link } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [FormData, setFormData] = useState({ email: "", password: "" });
+  const { login } = useContext(AuthContext);
+
+  const [searchParams] = useSearchParams();
+  const [formData, setFormData] = useState({ email: "", password: "" });
+
+  useEffect(() => {
+    const token = searchParams.get('token');
+    const error = searchParams.get('error');
+
+    if (token) {
+      localStorage.setItem('token', token);
+      window.location.href = '/'; 
+    }
+
+    if (error) {
+      console.log(error);
+    }
+
+  }, [searchParams]);
 
   const handleChange = (e) => {
     setFormData({ ...FormData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-e.preventDefault();
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await login(formData.email, formData.password);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -63,3 +87,4 @@ e.preventDefault();
     </main>
   );
 };
+export default Login;
