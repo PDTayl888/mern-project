@@ -12,6 +12,20 @@ const Dashboard = () => {
   } = useFetch("/api/categories");
   const [newCategoryName, setNewCategoryName] = useState("");
 
+  const handleCreateCategory = async (e) => {
+    e.preventDefault();
+    try {
+      const newCat = await fetchClient("/api/categories", {
+        method: "POST",
+        body: JSON.stringify({ name: newCategoryName }),
+      });
+      setData([...categories, newCat]);
+      setNewCategoryName("");
+    } catch (error) {
+        console.error(error);
+    }
+  };
+
   return (
     <div>
       <h1>CATEGORIES</h1>
