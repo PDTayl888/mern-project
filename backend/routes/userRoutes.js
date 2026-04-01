@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const User = require("../../models/User");
+const passport = require("passport");
 
 router.post("/register", async (req, res) => {
   try {
@@ -29,7 +30,7 @@ router.post("/login", async (req, res) => {
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-        return res.status(400).json({ message: "PASSWORD INVALID" });
+      return res.status(400).json({ message: "PASSWORD INVALID" });
     }
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
@@ -40,5 +41,19 @@ router.post("/login", async (req, res) => {
     res.status(500).json({ message: "SERVER ERROR", error: error.message });
   }
 });
+
+router.get("/auth/github", passport.authenticate("github", { session: false }));
+
+router.get(
+  "/auth/github/callback",
+  passport.authenticate("github", {
+    session: false,
+    failureRedirect: `${process.env.FRONTEND_URL}/login?error=github_failed`,
+  }),
+  (req, res) => {
+    const token = signToken(req.user._id);
+    res.redirect(`${process.env.FRONTEND_URL}/login?token=${token}`);
+  },
+);
 
 module.exports = router;
