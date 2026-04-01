@@ -26,9 +26,27 @@ const Dashboard = () => {
     }
   };
 
-  const handleDeleteCategory = async () => {}
+  const handleDeleteCategory = async (id) => {
+   try {
+      await fetchClient(`/api/categories/${id}`, { method: "DELETE" });
+      setData(categories.filter((cat) => cat._id !== id));
+    } catch (error) {
+      console.log(error, "DELETE FAILED");
+    }
+  }; 
+  
 
-  const handleUpdateCategory = async () => {}
+  const handleUpdateCategory = async (id, updatedData) => {
+    try {
+      const updatedCat = await fetchClient(`/api/categories/${id}`, {
+        method: "PUT",
+        body: JSON.stringify(updatedData),
+      });
+      setData(categories.map((cat) => (cat._id === id ? updatedCat : cat)));
+    } catch (error) {
+      console.log(error, "UPDATE FAILED");
+    }
+  };
 
   return (
     <div>
