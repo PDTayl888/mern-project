@@ -24,32 +24,46 @@ const CategoryDetails = () => {
   const handleAddCard = async (e) => {
     e.preventDefault();
     try {
-        const createdCard = await fetch(`/api/categories/${categoryId}/cards`, {
-            method: "POST",
+      const createdCard = await fetch(`/api/categories/${categoryId}/cards`, {
+        method: "POST",
         body: JSON.stringify(newCard),
-        });
-        setData([...cards, createdCard]);
-        setNewCard({ channelName: "", youtubeUrl: "", description: ""});
+      });
+      setData([...cards, createdCard]);
+      setNewCard({ channelName: "", youtubeUrl: "", description: "" });
     } catch (error) {
-        console.error(error);
+      console.error(error);
     }
   };
 
   const handleUpdateCard = async (cardId, updatedData) => {
     try {
-      const updatedCard = await fetch(`/api/categories/${categoryId}/cards/${cardId}`, {
-        method: "PUT",
-        body: JSON.stringify(updatedData),
-      });
-      setData(cards.map(card => card._id === cardId ? updatedCard : card));
+      const updatedCard = await fetch(
+        `/api/categories/${categoryId}/cards/${cardId}`,
+        {
+          method: "PUT",
+          body: JSON.stringify(updatedData),
+        },
+      );
+      setData(cards.map((card) => (card._id === cardId ? updatedCard : card)));
     } catch (error) {
       alert(error);
     }
   };
 
-  const handleDeleteCard = async () => {
-
+  const handleDeleteCard = async (cardId) => {
+    if (!window.confirm("Remove this channel?")) return;
+    try {
+      await fetch(`/api/categories/${categoryId}/cards/${cardId}`, {
+        method: "DELETE",
+      });
+      setData(cards.filter((card) => card._id !== cardId)); 
+    } catch (error) {
+      alert(error, "DELETE FAILED");
+    }
   };
+
+  if (loading) return <p>LOADING...</p>;
+  if (error) return <p>Error: {error}</p>;
 
   return (
     <div>
