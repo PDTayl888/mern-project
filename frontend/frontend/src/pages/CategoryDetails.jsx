@@ -35,9 +35,21 @@ const CategoryDetails = () => {
     }
   };
 
-  const handleUpdateCard = async () => {};
+  const handleUpdateCard = async (cardId, updatedData) => {
+    try {
+      const updatedCard = await fetch(`/api/categories/${categoryId}/cards/${cardId}`, {
+        method: "PUT",
+        body: JSON.stringify(updatedData),
+      });
+      setData(cards.map(card => card._id === cardId ? updatedCard : card));
+    } catch (error) {
+      alert(error);
+    }
+  };
 
-  const handleDeleteCard = async () => {};
+  const handleDeleteCard = async () => {
+
+  };
 
   return (
     <div>
