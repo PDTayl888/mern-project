@@ -14,6 +14,16 @@ const CategoryItem = ({ category }) => {
         setEditDesc(e.target.value);
     };
 
+    const handleSave = () => {
+
+    };
+
+    const handleCancel = () => {
+    
+        setIsEditing(false);
+    };
+
+
 
     return (
  <li>
@@ -29,18 +39,19 @@ const CategoryItem = ({ category }) => {
             value={editDesc}
             onChange={handleEditDesc}
           />
-          <button onClick={handleSave}>save changes</button>
+          <button onClick={handleSave}>save</button>
           <button onClick={handleCancel}>cancel</button>
         </div>
       ) : (
         <div>
-          <h3>{card.channelName}</h3>
-          </div>
+          <h3>{category.name}</h3>
+          
           <button onClick={() => setIsEditing(true)}>Edit Text</button>
-          <button onClick={() => onDelete(card._id)}>Remove</button>
+          <button onClick={() => onDelete(category._id)}>Delete</button>
         </div>
       )}
-    </li>    );
+    </li>
+    );
 };
 
 export default CategoryItem;
