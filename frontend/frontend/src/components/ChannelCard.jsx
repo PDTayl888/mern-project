@@ -11,7 +11,7 @@ const ChannelCard = ({ card, onDelete }) => {
   });
 
   const handleChange = (e) => {
-    setEditData({...editData, e.target.name: e.target.value});
+    setEditData({...editData, [e.target.name]: e.target.value});
   };
 
   const handleSave = () => {
