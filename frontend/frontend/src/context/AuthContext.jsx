@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 
 export const AuthContext = createContext();
 
-export AuthProvider = () => {
-
+export const AuthProvider = ({children}) => {
+const [loading, setLoading] = useState(true);
 const [user, setUser] = useState(null);
 
 useEffect(() => {
@@ -13,7 +13,7 @@ useEffect(() => {
       const token = localStorage.getItem('token');
       if (token) {
         try {
-          const userData = await fetchClient('/api/users/profile');
+          const userData = await fetch('/api/users/profile');
           setUser(userData);
         } catch (err) {
           localStorage.removeItem('token');
@@ -26,7 +26,7 @@ useEffect(() => {
   }, []);
 
   const login = async (email, password) => {
-    const data = await fetchClient('/api/users/login', {
+    const data = await fetch('/api/users/login', {
       method: 'POST',
       body: JSON.stringify({ email, password }),
     });
@@ -36,7 +36,7 @@ useEffect(() => {
   };
 
   const register = async (userData) => {
-    const data = await fetchClient('/api/users/register', {
+    const data = await fetch('/api/users/register', {
       method: 'POST',
       body: JSON.stringify(userData),
     });
@@ -50,7 +50,14 @@ useEffect(() => {
     setUser(null);
     window.location.href = '/login';
     //maybe the navigate way, try them both!!!!
-    //navigate('/login);
+    //navigate('/login');
   };
+
+  return (
+    <AuthContext.Provider value={{ uesr, setUser, login, register, logout, loading}}>
+        {!loading && children}
+    </AuthContext.Provider>
+  );
+};
 
 
