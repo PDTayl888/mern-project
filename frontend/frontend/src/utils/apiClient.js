@@ -1,4 +1,4 @@
-export const fetchClient = async (endpoint, customConfig = {}) => {
+export const fetch = async (endpoint, customConfig = {}) => {
   const token = localStorage.getItem("token");
 
   const headers = {
