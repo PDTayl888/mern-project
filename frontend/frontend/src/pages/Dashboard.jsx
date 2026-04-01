@@ -26,6 +26,10 @@ const Dashboard = () => {
     }
   };
 
+  const handleDeleteCategory = async () => {}
+
+  const handleUpdateCategory = async () => {}
+
   return (
     <div>
       <h1>CATEGORIES</h1>
@@ -46,7 +50,11 @@ const Dashboard = () => {
       <section>
         {categories.length > 0 ? (
             categories.map((cat) => (
-             <CategoryItem key={cat._id} category={cat} />
+             <CategoryItem 
+             key={cat._id} 
+             category={cat}
+             onDelete={handleDeleteCategory}
+             onUpdate={handleUpdateCategory} />
             ))
         ) : (
             <p>NO CATEGORIES AVAILABLE</p>
