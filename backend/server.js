@@ -18,7 +18,7 @@ const channelCardRoutes = require('./routes/channelCardRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 
 
-app.use('/api/auth', userRoutes);
+app.use('/api/users', userRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/categories/card', channelCardRoutes);
 

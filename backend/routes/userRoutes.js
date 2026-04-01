@@ -4,6 +4,7 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const User = require("../../models/User");
 const passport = require("passport");
+const { authMiddleware } = require("../middleware/authMiddleware");
 
 router.post("/register", async (req, res) => {
   try {
@@ -42,7 +43,23 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.get("/auth/github", passport.authenticate("github", { session: false }));
+router.get("/profile", authMiddleware, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+    if (!user) {
+      return res.status(404).json({ message: "USER NOT FOUND" });
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ message: "SERVER ERROR", error: error.message });
+  }
+});
+
+router.get(
+  "/auth/github",
+  passport.authenticate("github", { session: false }),
+);
 
 router.get(
   "/auth/github/callback",
