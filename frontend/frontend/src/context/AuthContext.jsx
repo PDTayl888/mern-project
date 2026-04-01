@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    //const navigate = useNavigate();
+  //const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
 
@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
           const userData = await fetch("/api/users/profile");
           setUser(userData);
         } catch (err) {
-            console.log(err);
+          console.log(err);
           localStorage.removeItem("token");
           setUser(null);
         }

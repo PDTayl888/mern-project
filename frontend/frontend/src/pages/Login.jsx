@@ -10,19 +10,20 @@ const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
 
   useEffect(() => {
-    const token = searchParams.get('token');
-    const error = searchParams.get('error');
+    const token = searchParams.get("token");
+    const error = searchParams.get("error");
 
     if (token) {
-      localStorage.setItem('token', token);
-      window.location.href = '/'; 
+      localStorage.setItem("token", token);
+      window.location.href = "/";
     }
 
     if (error) {
       console.log(error);
     }
-
   }, [searchParams]);
+
+  //TODO: SHOW TEH USER AN ERROR MESSAGE!!
 
   const handleChange = (e) => {
     setFormData({ ...FormData, [e.target.name]: e.target.value });
