@@ -86,7 +86,7 @@ const Login = () => {
               "http://localhost:5000/api/users/auth/github")
           }
         >
-          Continue with GitHub
+          LOGIN WITH GITHUB
         </button>
       </div>
     </main>
