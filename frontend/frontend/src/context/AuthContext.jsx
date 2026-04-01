@@ -16,6 +16,7 @@ export const AuthProvider = ({ children }) => {
           const userData = await fetch("/api/users/profile");
           setUser(userData);
         } catch (err) {
+            console.log(err);
           localStorage.removeItem("token");
           setUser(null);
         }
