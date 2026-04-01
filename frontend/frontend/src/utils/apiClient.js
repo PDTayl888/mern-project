@@ -15,7 +15,7 @@ export const fetchClient = async (endpoint, customConfig = {}) => {
   const response = await fetch(endpoint, config);
   if (!response.ok) {
     const errorMessage = await response.text();
-    throw new Error(errorMessage || "NETWORK REQIEST ERROR");
+    throw new Error(errorMessage || "NETWORK REQUEST ERROR");
   }
   return response.json();
 };

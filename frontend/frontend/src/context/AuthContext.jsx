@@ -27,16 +27,21 @@ export const AuthProvider = ({ children }) => {
     initAuth();
   }, []);
 
-  const login = async (email, password) => {
-    const data = await fetch("/api/users/login", {
-      method: "POST",
-      body: JSON.stringify({ email, password }),
-    });
-    localStorage.setItem("token", data.token);
-    setUser(data.user);
-    return data;
+const login = async (email, password) => {
+    try {
+      const data = await fetch("/api/users/login", {
+        method: "POST",
+        body: JSON.stringify({ email, password }),
+      });
+      localStorage.setItem("token", data.token);
+      setUser(data.user); 
+      return data;
+    } catch (error) {
+      console.error("Login failed", error);
+      throw error; 
+    }
   };
-
+  
   const register = async (userData) => {
     const data = await fetch("/api/users/register", {
       method: "POST",

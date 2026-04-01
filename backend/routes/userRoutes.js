@@ -6,6 +6,12 @@ const User = require("../../models/User");
 const passport = require("passport");
 const { authMiddleware } = require("../middleware/authMiddleware");
 
+const signToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: "1d",
+  });
+};
+
 router.post("/register", async (req, res) => {
   try {
     const { username, email, password } = req.body;
@@ -15,7 +21,11 @@ router.post("/register", async (req, res) => {
       return res.status(400).json({ message: "USER EXISTS" });
     }
     const user = await User.create({ username, email, password });
-    res.status(201).json({ message: "USER REGISTERED", userId: user._id });
+    const token = signToken(user._id);
+    res.status(201).json({
+      token,
+      user: { id: user._id, username: user.username, email: user.email },
+    });
   } catch (err) {
     res.status(500).json({ message: "SERVER ERROR", error: err.message });
   }
@@ -37,7 +47,10 @@ router.post("/login", async (req, res) => {
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "1d",
     });
-    res.status(200).json({ token });
+    res.status(200).json({
+      token,
+      user: { id: user._id, username: user.username, email: user.email },
+    });
   } catch (error) {
     res.status(500).json({ message: "SERVER ERROR", error: error.message });
   }
@@ -56,10 +69,7 @@ router.get("/profile", authMiddleware, async (req, res) => {
   }
 });
 
-router.get(
-  "/auth/github",
-  passport.authenticate("github", { session: false }),
-);
+router.get("/auth/github", passport.authenticate("github", { session: false }));
 
 router.get(
   "/auth/github/callback",

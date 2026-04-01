@@ -20,7 +20,7 @@ const categoryRoutes = require('./routes/categoryRoutes');
 
 app.use('/api/users', userRoutes);
 app.use('/api/categories', categoryRoutes);
-app.use('/api/categories/card', channelCardRoutes);
+app.use('/api/categories/:categoryId/card', channelCardRoutes);
 
 app.listen(PORT, () => {
     console.log(`SERVER RUNNING AT PORT ${PORT}`);
