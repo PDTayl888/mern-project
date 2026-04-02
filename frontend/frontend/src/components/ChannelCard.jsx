@@ -27,7 +27,7 @@ const ChannelCard = ({ card, onDelete, onUpdate }) => {
   };
 
   return (
-    <div>
+    <div className="test-comp">
       {isEditing ? (
         <div>
           <input

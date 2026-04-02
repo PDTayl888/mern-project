@@ -42,7 +42,7 @@ const Login = () => {
   };
 
   return (
-    <main>
+    <main className="test-page">
       <h1>Log in:</h1>
 
       {errorMsg && <div>{errorMsg}</div>}

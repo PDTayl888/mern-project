@@ -3,8 +3,13 @@ import { useParams, useNavigate } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import ChannelCard from "../components/ChannelCard";
 import { fetchClient as fetch } from "../utils/apiClient";
+import CategoryItem from "../components/CategoryItem";
 
 const CategoryDetails = () => {
+  const pageTest = {
+    backgroundColor: "#7f10ee",
+    border: "3px solid #fb11c0",
+  };
   const { categoryId } = useParams();
   const navigate = useNavigate();
 
@@ -14,6 +19,11 @@ const CategoryDetails = () => {
     loading,
     error,
   } = useFetch(`/api/categories/${categoryId}/card`);
+
+  const { 
+    data: categories, 
+    loading: catLoading 
+  } = useFetch(`/api/categories`);
 
   const [newCard, setNewCard] = useState({
     channelName: "",
@@ -67,10 +77,10 @@ const CategoryDetails = () => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div>
+    <div style={pageTest}>
       <button onClick={() => navigate("/")}>DASHBOARD</button>
 
-      <h1>CATEGORIES</h1>
+      <h1>CHANNELS</h1>
 
       <form onSubmit={handleAddCard}>
         <input

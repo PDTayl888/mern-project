@@ -30,7 +30,7 @@ const Register = () => {
   };
 
   return (
-    <main>
+    <main className="test-page">
       <h1>create sub_script_ account here!</h1>
 
       {errorMsg && <div>{errorMsg}</div>}

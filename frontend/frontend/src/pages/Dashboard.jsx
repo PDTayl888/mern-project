@@ -4,6 +4,11 @@ import { fetchClient } from "../utils/apiClient";
 import CategoryItem from "../components/CategoryItem";
 
 const Dashboard = () => {
+  const pageTest = {
+  backgroundColor: '#10ee4b',
+  border: '3px solid #fb1111',
+};
+
   const {
     data: categories,
     setData,
@@ -52,7 +57,7 @@ const Dashboard = () => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div>
+    <div style={pageTest}>
       <h1>CATEGORIES</h1>
 
       <section>

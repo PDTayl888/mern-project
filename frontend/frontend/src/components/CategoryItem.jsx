@@ -26,7 +26,7 @@ const CategoryItem = ({ category, onDelete, onUpdate }) => {
   };
 
   return (
-    <li>
+    <li className="test-comp">
       {isEditing ? (
         <div>
           <input type="text" value={editName} onChange={handleEditName} />
