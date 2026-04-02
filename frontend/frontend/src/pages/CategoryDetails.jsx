@@ -6,6 +6,14 @@ import { fetchClient as fetch } from "../utils/apiClient";
 import CategoryItem from "../components/CategoryItem";
 
 const CategoryDetails = () => {
+    const gridContainerStyle = {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "20px",
+    justifyContent: "center",
+    padding: "20px",
+  };
+
   const pageTest = {
     backgroundColor: "#205992",
     border: "3px solid #fb11c0",
@@ -113,7 +121,7 @@ const CategoryDetails = () => {
         <button type="submit">Add Channel</button>
       </form>
 
-      <ul className="card-list">
+      <ul style={gridContainerStyle}>
         {cards && cards.length > 0 ? (
           cards.map((card) => (
             <ChannelCard

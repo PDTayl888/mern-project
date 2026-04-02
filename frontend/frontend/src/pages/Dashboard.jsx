@@ -4,10 +4,18 @@ import { fetchClient } from "../utils/apiClient";
 import CategoryItem from "../components/CategoryItem";
 
 const Dashboard = () => {
+  const gridContainerStyle = {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "20px",
+    justifyContent: "center",
+    padding: "20px",
+  };
+
   const pageTest = {
-  backgroundColor: "#205992",
-  border: '3px solid #fb1111',
-};
+    backgroundColor: "#205992",
+    border: "3px solid #fb1111",
+  };
 
   const {
     data: categories,
@@ -16,17 +24,21 @@ const Dashboard = () => {
     error,
   } = useFetch("/api/categories");
   const [newCategoryName, setNewCategoryName] = useState("");
-  const [newCategoryDescription, setNewCategoryDescription] = useState("")
+  const [newCategoryDescription, setNewCategoryDescription] = useState("");
 
   const handleCreateCategory = async (e) => {
     e.preventDefault();
     try {
       const newCat = await fetchClient("/api/categories", {
         method: "POST",
-        body: JSON.stringify({ name: newCategoryName, description: newCategoryDescription }),
+        body: JSON.stringify({
+          name: newCategoryName,
+          description: newCategoryDescription,
+        }),
       });
       setData([...categories, newCat]);
       setNewCategoryName("");
+      setNewCategoryDescription("");
     } catch (error) {
       console.error(error);
     }
@@ -79,7 +91,7 @@ const Dashboard = () => {
         </form>
       </section>
 
-      <section>
+      <section style={gridContainerStyle}>
         {categories?.length > 0 ? (
           categories.map((cat) => (
             <CategoryItem
