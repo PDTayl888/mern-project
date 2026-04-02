@@ -48,7 +48,9 @@ router.post("/", authMiddleware, async (req, res) => {
 
     res.status(201).json(card);
   } catch (error) {
-    res.status(400).json({ message: "CREATE FAILED" });
+    const message = error.name === "ValidationError" ?
+    Object.values(error.errors).map(val => val.message)[0] : "UNEXPECTED ERROR";
+    res.status(400).json({ message });
   }
 });
 

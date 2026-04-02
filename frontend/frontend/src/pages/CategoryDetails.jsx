@@ -81,12 +81,14 @@ const CategoryDetails = () => {
           required
         />
         <input
-          placeholder="yt URL"
+          type="url"
+          placeholder="https://youtube.com/..."
           value={newCard.youTubeUrl}
           onChange={(e) =>
             setNewCard({ ...newCard, youTubeUrl: e.target.value })
           }
-          required
+          pattern=".*youtube\.com.*|.*youtu\.be.*"
+          title="enter valid YouTube URL"
         />
         <input
           placeholder="description"

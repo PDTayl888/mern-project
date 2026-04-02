@@ -8,6 +8,11 @@ const channelCardSchema = new mongoose.Schema(
     },
     youTubeUrl: {
       type: String,
+      required: [true, "URL REQUIRED"],
+      match: [
+        /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/,
+        "ENTER VALID YT URL",
+      ]
     },
     description: {
       type: String,
