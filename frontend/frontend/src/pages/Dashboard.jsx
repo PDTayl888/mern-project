@@ -5,7 +5,7 @@ import CategoryItem from "../components/CategoryItem";
 
 const Dashboard = () => {
   const pageTest = {
-  backgroundColor: '#10ee4b',
+  backgroundColor: "#205992",
   border: '3px solid #fb1111',
 };
 

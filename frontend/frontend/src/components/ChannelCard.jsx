@@ -1,6 +1,12 @@
 import { useState } from "react";
 
 const ChannelCard = ({ card, onDelete, onUpdate }) => {
+  const cardStyle = {
+    backgroundColor: "#30cdcd",
+    color: "#6e2fc5",
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)",
+    borderRadius: "12px",
+  };
   const [isEditing, setIsEditing] = useState(false);
   const [editData, setEditData] = useState({
     channelName: card.channelName,
@@ -27,7 +33,7 @@ const ChannelCard = ({ card, onDelete, onUpdate }) => {
   };
 
   return (
-    <div className="test-comp">
+    <div style={cardStyle}>
       {isEditing ? (
         <div>
           <input

@@ -7,7 +7,7 @@ import CategoryItem from "../components/CategoryItem";
 
 const CategoryDetails = () => {
   const pageTest = {
-    backgroundColor: "#7f10ee",
+    backgroundColor: "#205992",
     border: "3px solid #fb11c0",
   };
   const { categoryId } = useParams();

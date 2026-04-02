@@ -2,6 +2,13 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const CategoryItem = ({ category, onDelete, onUpdate }) => {
+  const categoryStyle = {
+    backgroundColor: "#30cdcd",
+    color: "#6e2fc5",
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)",
+    borderRadius: "12px",
+  };
+
   const [isEditing, setIsEditing] = useState(false);
   const [editName, setEditName] = useState(category.name);
   const [editDesc, setEditDesc] = useState(category.description);
@@ -15,7 +22,6 @@ const CategoryItem = ({ category, onDelete, onUpdate }) => {
   };
 
   const handleSave = () => {
-
     onUpdate(category._id, { name: editName, description: editDesc });
     setIsEditing(false);
   };
@@ -27,7 +33,7 @@ const CategoryItem = ({ category, onDelete, onUpdate }) => {
   };
 
   return (
-    <li className="test-comp">
+    <li style={categoryStyle}>
       {isEditing ? (
         <div>
           <input type="text" value={editName} onChange={handleEditName} />
