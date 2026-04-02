@@ -1,21 +1,55 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "./context/AuthContext";
+
+import Navbar from "./components/Navbar";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Dashboard from "./pages/Dashboard";
+import CategoryDetails from "./pages/CategoryDetails";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { user, loading } = useContext(AuthContext);
+
+  if (loading) {
+    return <div>LOADING...</div>;
+  }
 
   return (
-    <>
-      <section id="center">
-      </section>
+    <Router>
+      <div>
+        <Navbar />
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+        <main>
+          <Routes>
+            <Route
+              path="/"
+              element={user ? <Dashboard /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/categories/:categoryId"
+              element={user ? <CategoryDetails /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/login"
+              element={user ? <Login /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/register"
+              element={user ? <Register /> : <Navigate to="/" />}
+            />
+
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+        </main>
+      </div>
+    </Router>
+  );
 }
 
-export default App
+export default App;

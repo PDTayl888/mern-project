@@ -22,19 +22,18 @@ const Dashboard = () => {
       setData([...categories, newCat]);
       setNewCategoryName("");
     } catch (error) {
-        console.error(error);
+      console.error(error);
     }
   };
 
   const handleDeleteCategory = async (id) => {
-   try {
+    try {
       await fetchClient(`/api/categories/${id}`, { method: "DELETE" });
       setData(categories.filter((cat) => cat._id !== id));
     } catch (error) {
       console.log(error, "DELETE FAILED");
     }
-  }; 
-  
+  };
 
   const handleUpdateCategory = async (id, updatedData) => {
     try {
@@ -47,6 +46,9 @@ const Dashboard = () => {
       console.log(error, "UPDATE FAILED");
     }
   };
+
+  if (loading) return <p>LOADING...</p>;
+  if (error) return <p>Error: {error}</p>;
 
   return (
     <div>
@@ -67,15 +69,16 @@ const Dashboard = () => {
 
       <section>
         {categories.length > 0 ? (
-            categories.map((cat) => (
-             <CategoryItem 
-             key={cat._id} 
-             category={cat}
-             onDelete={handleDeleteCategory}
-             onUpdate={handleUpdateCategory} />
-            ))
+          categories.map((cat) => (
+            <CategoryItem
+              key={cat._id}
+              category={cat}
+              onDelete={handleDeleteCategory}
+              onUpdate={handleUpdateCategory}
+            />
+          ))
         ) : (
-            <p>NO CATEGORIES AVAILABLE</p>
+          <p>NO CATEGORIES AVAILABLE</p>
         )}
       </section>
     </div>
