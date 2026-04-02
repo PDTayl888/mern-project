@@ -1,20 +1,18 @@
 const express = require("express");
-//import ChannelCard from './../../frontend/frontend/src/components/ChannelCard';
 const router = express.Router({ mergeParams: true });
-const Category = require("../models/Category");
-const ChannelCard = require("../models/ChannelCard");
 const { authMiddleware } = require("../middleware/authMiddleware");
 
-router.get("/", authMiddleware, async (req, res) => {
-});
+const {
+  getCards,
+  createCard,
+  updateCard,
+  deleteCard,
+} = require("../controllers/channelCardController");
 
-router.post("/", authMiddleware, async (req, res) => {
-});
+router.get("/", authMiddleware, getCards);
+router.post("/", authMiddleware, createCard);
 
-router.put("/:id", authMiddleware, async (req, res) => {
-});
-
-router.delete("/:id", authMiddleware, async (req, res) => {
-});
+router.put("/:id", authMiddleware, updateCard);
+router.delete("/:id", authMiddleware, deleteCard);
 
 module.exports = router;

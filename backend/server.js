@@ -1,17 +1,23 @@
-const connectDB = require('./config/connection');
-
 const express = require('express');
 const cors = require('cors');
+const passport = require('passport');
+const connectDB = require('./config/connection');
+
+
 require('dotenv').config();
 
 const app = express();
+require('./config/passport');
+
+const PORT = process.env.PORT || 5000;
+
+connectDB();
 
 app.use(cors());
 
-const PORT = process.env.PORT || 5000;
-connectDB();
-
 app.use(express.json());
+
+app.use(passport.initialize());
 
 const userRoutes = require('./routes/userRoutes');
 const channelCardRoutes = require('./routes/channelCardRoutes');

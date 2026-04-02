@@ -1,73 +1,20 @@
 const express = require("express");
-const jwt = require("jsonwebtoken");
 const router = express.Router();
-const bcrypt = require("bcryptjs");
-const User = require("../models/User");
 const passport = require("passport");
 const { authMiddleware } = require("../middleware/authMiddleware");
 
-const signToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: "1d",
-  });
-};
+const {
+  registerUser,
+  loginUser,
+  getUserProfile,
+  githubAuthCallback,
+} = require("../controllers/userController");
 
-router.post("/register", async (req, res) => {
-  try {
-    const { username, email, password } = req.body;
+router.post("/register", registerUser);
 
-    const isUser = await User.findOne({ email });
-    if (isUser) {
-      return res.status(400).json({ message: "USER EXISTS" });
-    }
-    const user = await User.create({ username, email, password });
-    const token = signToken(user._id);
-    res.status(201).json({
-      token,
-      user: { id: user._id, username: user.username, email: user.email },
-    });
-  } catch (err) {
-    res.status(500).json({ message: "SERVER ERROR", error: err.message });
-  }
-});
+router.post("/login", loginUser);
 
-router.post("/login", async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(404).json({ message: "EMAIL INVALID" });
-    }
-
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(400).json({ message: "PASSWORD INVALID" });
-    }
-
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "1d",
-    });
-    res.status(200).json({
-      token,
-      user: { id: user._id, username: user.username, email: user.email },
-    });
-  } catch (error) {
-    res.status(500).json({ message: "SERVER ERROR", error: error.message });
-  }
-});
-
-router.get("/profile", authMiddleware, async (req, res) => {
-  try {
-    const user = await User.findById(req.user.id).select("-password");
-    if (!user) {
-      return res.status(404).json({ message: "USER NOT FOUND" });
-    }
-
-    res.status(200).json(user);
-  } catch (error) {
-    res.status(500).json({ message: "SERVER ERROR", error: error.message });
-  }
-});
+router.get("/profile", authMiddleware, getUserProfile);
 
 router.get("/auth/github", passport.authenticate("github", { session: false }));
 
@@ -77,10 +24,7 @@ router.get(
     session: false,
     failureRedirect: `${process.env.FRONTEND_URL}/login?error=github_failed`,
   }),
-  (req, res) => {
-    const token = signToken(req.user._id);
-    res.redirect(`${process.env.FRONTEND_URL}/login?token=${token}`);
-  },
+  githubAuthCallback,
 );
 
 module.exports = router;

@@ -9,11 +9,13 @@ passport.use(new GitHubStrategy({
     scope: ['user:email']
   },
   async (accessToken, refreshToken, profile, done) => {
+    console.log(profile);
     try {
         let user = await User.findOne({ githubId: profile.id });
       if (user) return done(null, user);
 
       const email = profile.emails && profile.emails[0] ? profile.emails[0].value : null;
+      const githubUsername = profile.username || profile.displayName || `user_${profile.id}`;
       if (!email) {
           return done(new Error("No email found on GitHub profile"), null);
       }
@@ -21,6 +23,9 @@ passport.use(new GitHubStrategy({
       user = await User.findOne({ email });
       if (user) {
         user.githubId = profile.id;
+        if (!user.username) {
+          user.username = githubUsername;
+        }
         await user.save();
         return done(null, user);
       }
