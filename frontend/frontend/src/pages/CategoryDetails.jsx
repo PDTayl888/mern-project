@@ -25,6 +25,9 @@ const CategoryDetails = () => {
     loading: catLoading 
   } = useFetch(`/api/categories`);
 
+    const currentCategory = categories?.find(cat => cat._id === categoryId);
+
+
   const [newCard, setNewCard] = useState({
     channelName: "",
     youTubeUrl: "",
@@ -80,6 +83,8 @@ const CategoryDetails = () => {
     <div style={pageTest}>
       <button onClick={() => navigate("/")}>DASHBOARD</button>
 
+
+    <h1>{currentCategory?.name?.toUpperCase()}</h1>
       <h1>CHANNELS</h1>
 
       <form onSubmit={handleAddCard}>

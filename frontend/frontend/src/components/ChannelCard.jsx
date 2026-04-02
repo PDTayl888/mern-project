@@ -70,7 +70,10 @@ const ChannelCard = ({ card, onDelete, onUpdate }) => {
 
           <div>
             <label>status: </label>
-            <select value={card.status}>
+            <select
+              value={card.status}
+              onChange={(e) => onUpdate(card._id, { status: e.target.value })}
+            >
               <option value="Subscribed">Subscribed</option>
               <option value="Watch Later">Watch Later</option>
               <option value="Archived">Archived</option>
