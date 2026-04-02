@@ -13,23 +13,23 @@ const CategoryDetails = () => {
     setData,
     loading,
     error,
-  } = useFetch(`/api/categories/${categoryId}/cards`);
+  } = useFetch(`/api/categories/${categoryId}/card`);
 
   const [newCard, setNewCard] = useState({
     channelName: "",
-    youtubeUrl: "",
+    youTubeUrl: "",
     description: "",
   });
 
   const handleAddCard = async (e) => {
     e.preventDefault();
     try {
-      const createdCard = await fetch(`/api/categories/${categoryId}/cards`, {
+      const createdCard = await fetch(`/api/categories/${categoryId}/card`, {
         method: "POST",
         body: JSON.stringify(newCard),
       });
-      setData([...cards, createdCard]);
-      setNewCard({ channelName: "", youtubeUrl: "", description: "" });
+      setData([...(cards || []), createdCard]);
+      setNewCard({ channelName: "", youTubeUrl: "", description: "" });
     } catch (error) {
       console.error(error);
     }
@@ -53,10 +53,10 @@ const CategoryDetails = () => {
   const handleDeleteCard = async (cardId) => {
     if (!window.confirm("Remove this channel?")) return;
     try {
-      await fetch(`/api/categories/${categoryId}/cards/${cardId}`, {
+      await fetch(`/api/categories/${categoryId}/card/${cardId}`, {
         method: "DELETE",
       });
-      setData(cards.filter((card) => card._id !== cardId)); 
+      setData(cards.filter((card) => card._id !== cardId));
     } catch (error) {
       alert(error, "DELETE FAILED");
     }
@@ -82,12 +82,21 @@ const CategoryDetails = () => {
         />
         <input
           placeholder="yt URL"
-          value={newCard.youtubeURL}
+          value={newCard.youTubeUrl}
           onChange={(e) =>
-            setNewCard({ ...newCard, youtubeURL: e.target.value })
+            setNewCard({ ...newCard, youTubeUrl: e.target.value })
           }
           required
         />
+        <input
+          placeholder="description"
+          value={newCard.description}
+          onChange={(e) =>
+            setNewCard({ ...newCard, description: e.target.value })
+          }
+          required
+        />
+
         <button type="submit">Add Channel</button>
       </form>
 

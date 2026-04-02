@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const ChannelCard = ({ card, onDelete }) => {
+const ChannelCard = ({ card, onDelete, onUpdate }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editData, setEditData] = useState({
     channelName: card.channelName,
@@ -9,23 +9,25 @@ const ChannelCard = ({ card, onDelete }) => {
   });
 
   const handleChange = (e) => {
-    setEditData({...editData, [e.target.name]: e.target.value});
+    setEditData({ ...editData, [e.target.name]: e.target.value });
   };
 
   const handleSave = () => {
+    onUpdate(card._id, editData);
+    setIsEditing(false);
   };
 
   const handleCancel = () => {
     setEditData({
-        channelName: card.channelName,
-        youTubeUrl: card.youTubeUrl,
-        description: card.description,
+      channelName: card.channelName,
+      youTubeUrl: card.youTubeUrl,
+      description: card.description,
     });
     setIsEditing(false);
   };
 
   return (
-    <li>
+    <div>
       {isEditing ? (
         <div>
           <input
@@ -35,13 +37,14 @@ const ChannelCard = ({ card, onDelete }) => {
             onChange={handleChange}
           />
           <input
-            type="url"
+            type="text"
             name="youTubeUrl"
             value={editData.youTubeUrl}
             onChange={handleChange}
           />
           <input
             type="text"
+            placeholder="description"
             name="description"
             value={editData.description}
             onChange={handleChange}
@@ -53,10 +56,17 @@ const ChannelCard = ({ card, onDelete }) => {
       ) : (
         <div>
           <h3>{card.channelName}</h3>
-          <p>
-            <a href={card.youTubeUrl}>{card.youTubeUrl}</a>
-          </p>
-          <p>{card.description}</p>
+
+          {card.youTubeUrl ? (
+            <p>
+              <a href={card.youTubeUrl} target="_blank" rel="noreferrer">
+                {card.youTubeUrl}
+              </a>
+            </p>
+          ) : (
+            <p>No URL saved.</p>
+          )}
+          <div>{card.description}</div>
 
           <div>
             <label>status: </label>
@@ -70,7 +80,7 @@ const ChannelCard = ({ card, onDelete }) => {
           <button onClick={() => onDelete(card._id)}>Remove</button>
         </div>
       )}
-    </li>
+    </div>
   );
 };
 

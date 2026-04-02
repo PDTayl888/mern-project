@@ -25,7 +25,7 @@ router.get("/", authMiddleware, async (req, res) => {
 
 router.post("/", authMiddleware, async (req, res) => {
   try {
-    const { channelName, youtubeUrl, description, status } = req.body;
+    const { channelName, youTubeUrl, description, status } = req.body;
 
     const category = await Category.findById(req.params.categoryId);
     if (!category) {
@@ -39,7 +39,7 @@ router.post("/", authMiddleware, async (req, res) => {
 
     const card = await ChannelCard.create({
       channelName,
-      youtubeUrl,
+      youTubeUrl,
       description,
       status: status || "Subscribed",
       category: req.params.categoryId,

@@ -6,7 +6,7 @@ const channelCardSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    youtubeUrl: {
+    youTubeUrl: {
       type: String,
     },
     description: {
