@@ -14,7 +14,7 @@ const Dashboard = () => {
 
   const pageTest = {
     backgroundColor: "#205992",
-    border: "3px solid #fb1111",
+    border: "3px solid #74a1d4",
   };
 
   const {

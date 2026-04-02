@@ -16,7 +16,7 @@ const CategoryDetails = () => {
 
   const pageTest = {
     backgroundColor: "#205992",
-    border: "3px solid #fb11c0",
+    border: "3px solid #f57dd7",
   };
   const { categoryId } = useParams();
   const navigate = useNavigate();
