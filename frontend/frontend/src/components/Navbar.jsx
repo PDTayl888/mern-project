@@ -23,7 +23,6 @@ const Navbar = () => {
 
       <div>
         <span>Welcome, {user.username}</span>
-        <p>TEST TEST</p>
         {showDashboardButton && (
           <Link to="/">
             <button>

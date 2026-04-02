@@ -37,3 +37,6 @@ userSchema.pre('save', async function(next) {
 });
 
 module.exports = mongoose.model("User", userSchema);
+
+
+//localhost:5173/categories/69cec2b3fc29581d0674618b
