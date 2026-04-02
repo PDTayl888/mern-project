@@ -38,7 +38,7 @@ const CategoryDetails = () => {
   const handleUpdateCard = async (cardId, updatedData) => {
     try {
       const updatedCard = await fetch(
-        `/api/categories/${categoryId}/cards/${cardId}`,
+        `/api/categories/${categoryId}/card/${cardId}`,
         {
           method: "PUT",
           body: JSON.stringify(updatedData),
