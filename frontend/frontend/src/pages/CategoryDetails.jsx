@@ -31,7 +31,8 @@ const CategoryDetails = () => {
       setData([...(cards || []), createdCard]);
       setNewCard({ channelName: "", youTubeUrl: "", description: "" });
     } catch (error) {
-      console.error(error);
+      const errorParsed = JSON.parse(error.message);
+      alert(errorParsed.message);
     }
   };
 
