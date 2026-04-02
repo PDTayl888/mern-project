@@ -20,13 +20,9 @@ const CategoryDetails = () => {
     error,
   } = useFetch(`/api/categories/${categoryId}/card`);
 
-  const { 
-    data: categories, 
-    loading: catLoading 
-  } = useFetch(`/api/categories`);
+  const { data: categories, loading: catLoading } = useFetch(`/api/categories`);
 
-    const currentCategory = categories?.find(cat => cat._id === categoryId);
-
+  const currentCategory = categories?.find((cat) => cat._id === categoryId);
 
   const [newCard, setNewCard] = useState({
     channelName: "",
@@ -83,8 +79,8 @@ const CategoryDetails = () => {
     <div style={pageTest}>
       <button onClick={() => navigate("/")}>DASHBOARD</button>
 
-
-    <h1>{currentCategory?.name?.toUpperCase()}</h1>
+      <h1>{currentCategory?.name?.toUpperCase()}</h1>
+     
       <h1>CHANNELS</h1>
 
       <form onSubmit={handleAddCard}>

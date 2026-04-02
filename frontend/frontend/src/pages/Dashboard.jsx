@@ -23,7 +23,7 @@ const Dashboard = () => {
     try {
       const newCat = await fetchClient("/api/categories", {
         method: "POST",
-        body: JSON.stringify({ name: newCategoryName }),
+        body: JSON.stringify({ name: newCategoryName, description: newCategoryDescription }),
       });
       setData([...categories, newCat]);
       setNewCategoryName("");

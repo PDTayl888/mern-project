@@ -15,6 +15,7 @@ const CategoryItem = ({ category, onDelete, onUpdate }) => {
   };
 
   const handleSave = () => {
+
     onUpdate(category._id, { name: editName, description: editDesc });
     setIsEditing(false);
   };
@@ -39,7 +40,7 @@ const CategoryItem = ({ category, onDelete, onUpdate }) => {
           <Link to={`/categories/${category._id}`}>
             <h3>{category.name}</h3>
           </Link>
-          <p>{category.description || " "}</p>
+          <p>{category?.description || "NO DESCRIPTION AVAILABLE "}</p>
 
           <button onClick={() => setIsEditing(true)}>Edit Text</button>
           <button onClick={() => onDelete(category._id)}>Delete</button>
