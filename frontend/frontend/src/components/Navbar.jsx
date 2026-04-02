@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 const Navbar = () => {
@@ -10,6 +10,8 @@ const Navbar = () => {
 };
 
   const { user, logout } = useContext(AuthContext);
+  const location = useLocation();
+  const showDashboardButton = location.pathname !== "/";
 
   if (!user) return null;
 
@@ -21,6 +23,14 @@ const Navbar = () => {
 
       <div>
         <span>Welcome, {user.username}</span>
+        <p>TEST TEST</p>
+        {showDashboardButton && (
+          <Link to="/">
+            <button>
+              DASHBOARD
+            </button>
+          </Link>
+        )}
         <button onClick={logout}>Logout</button>
       </div>
     </header>

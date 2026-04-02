@@ -77,11 +77,10 @@ const CategoryDetails = () => {
 
   return (
     <div style={pageTest}>
-      <button onClick={() => navigate("/")}>DASHBOARD</button>
 
       <h1>{currentCategory?.name?.toUpperCase()}</h1>
      
-      <h1>CHANNELS</h1>
+      <h2>CHANNELS</h2>
 
       <form onSubmit={handleAddCard}>
         <input
