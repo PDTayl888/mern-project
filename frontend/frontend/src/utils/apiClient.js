@@ -1,3 +1,5 @@
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 export const fetchClient = async (endpoint, customConfig = {}) => {
   const token = localStorage.getItem("token");
 
@@ -12,7 +14,7 @@ export const fetchClient = async (endpoint, customConfig = {}) => {
     ...customConfig,
     headers,
   };
-  const response = await fetch(endpoint, config);
+  const response = await fetch(`${BASE_URL}${endpoint}`, config);
   if (!response.ok) {
     const errorMessage = await response.text();
     throw new Error(errorMessage || "NETWORK REQUEST ERROR");

@@ -11,6 +11,7 @@ const Dashboard = () => {
     error,
   } = useFetch("/api/categories");
   const [newCategoryName, setNewCategoryName] = useState("");
+  const [newCategoryDescription, setNewCategoryDescription] = useState("")
 
   const handleCreateCategory = async (e) => {
     e.preventDefault();
@@ -63,12 +64,18 @@ const Dashboard = () => {
             onChange={(e) => setNewCategoryName(e.target.value)}
             required
           />
+          <textarea
+            placeholder="DESCRIPTION"
+            value={newCategoryDescription}
+            onChange={(e) => setNewCategoryDescription(e.target.value)}
+            rows="2"
+          />
           <button type="submit">CREATE CATEGORY</button>
         </form>
       </section>
 
       <section>
-        {categories.length > 0 ? (
+        {categories?.length > 0 ? (
           categories.map((cat) => (
             <CategoryItem
               key={cat._id}
