@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import ChannelCard from "../components/ChannelCard";
-import { fetch } from "../utils/apiClient";
+import { fetchClient as fetch } from "../utils/apiClient";
 
 const CategoryDetails = () => {
   const { categoryId } = useParams();

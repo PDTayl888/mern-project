@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { fetch } from "../utils/apiClient";
 
 const ChannelCard = ({ card, onDelete }) => {
   const [isEditing, setIsEditing] = useState(false);

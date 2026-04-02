@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect } from "react";
-import { fetch } from "../utils/apiClient";
+
 import { useNavigate } from "react-router-dom";
+import { fetchClient } from './../utils/apiClient';
 
 export const AuthContext = createContext();
 
@@ -14,7 +15,7 @@ export const AuthProvider = ({ children }) => {
       const token = localStorage.getItem("token");
       if (token) {
         try {
-          const userData = await fetch("/api/users/profile");
+          const userData = await fetchClient("/api/users/profile");
           setUser(userData);
         } catch (err) {
           console.log(err);
@@ -29,7 +30,7 @@ export const AuthProvider = ({ children }) => {
 
 const login = async (email, password) => {
     try {
-      const data = await fetch("/api/users/login", {
+      const data = await fetchClient("/api/users/login", {
         method: "POST",
         body: JSON.stringify({ email, password }),
       });
@@ -41,9 +42,9 @@ const login = async (email, password) => {
       throw error; 
     }
   };
-  
+
   const register = async (userData) => {
-    const data = await fetch("/api/users/register", {
+    const data = await fetchClient("/api/users/register", {
       method: "POST",
       body: JSON.stringify(userData),
     });

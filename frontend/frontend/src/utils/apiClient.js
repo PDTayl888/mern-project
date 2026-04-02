@@ -1,4 +1,4 @@
-export const fetch = async (endpoint, customConfig = {}) => {
+export const fetchClient = async (endpoint, customConfig = {}) => {
   const token = localStorage.getItem("token");
 
   const headers = {
@@ -19,3 +19,4 @@ export const fetch = async (endpoint, customConfig = {}) => {
   }
   return response.json();
 };
+

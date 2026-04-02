@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetch } from "../utils/apiClient";
+import { fetchClient } from "../utils/apiClient";
 
 const useFetch = (url) => {
   const [data, setData] = useState(null);
@@ -11,7 +11,7 @@ const useFetch = (url) => {
 
     const fetchData = async () => {
       try {
-        const result = await fetch(url, { signal: controller.signal });
+        const result = await fetchClient(url, { signal: controller.signal });
         setData(result);
         setError(null);
       } catch (error) {

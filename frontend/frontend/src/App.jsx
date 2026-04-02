@@ -15,6 +15,7 @@ import CategoryDetails from "./pages/CategoryDetails";
 
 function App() {
   const { user, loading } = useContext(AuthContext);
+  console.log("Current User Status:", { user, loading });
 
   if (loading) {
     return <div>LOADING...</div>;
@@ -37,11 +38,11 @@ function App() {
             />
             <Route
               path="/login"
-              element={user ? <Login /> : <Navigate to="/" />}
+              element={!user ? <Login /> : <Navigate to="/" />}
             />
             <Route
               path="/register"
-              element={user ? <Register /> : <Navigate to="/" />}
+              element={!user ? <Register /> : <Navigate to="/" />}
             />
 
             <Route path="*" element={<Navigate to="/" />} />
