@@ -36,7 +36,9 @@ const CategoryItem = ({ category, onDelete, onUpdate }) => {
         </div>
       ) : (
         <div>
-          <h3>{category.name}</h3>
+          <Link to={`/categories/${category._id}`}>
+            <h3>{category.name}</h3>
+          </Link>
           <p>{category.description || " "}</p>
 
           <button onClick={() => setIsEditing(true)}>Edit Text</button>
