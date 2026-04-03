@@ -27,7 +27,7 @@ const Login = () => {
   //TODO: SHOW TEH USER AN ERROR MESSAGE!!
 
   const handleChange = (e) => {
-    setFormData({ ...FormData, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
@@ -52,7 +52,7 @@ const Login = () => {
           type="email"
           name="email"
           placeholder="email address"
-          value={FormData.email}
+          value={formData.email}
           onChange={handleChange}
           required
         />
@@ -60,7 +60,7 @@ const Login = () => {
           type="password"
           name="password"
           placeholder="password"
-          value={FormData.password}
+          value={formData.password}
           onChange={handleChange}
           required
         />
@@ -83,7 +83,7 @@ const Login = () => {
         <button
           onClick={() =>
             (window.location.href =
-              "https://mern-project-41xe.onrender.com/api/users/auth/github/callback")
+              "https://mern-project-41xe.onrender.com/api/users/auth/github")
           }
         >
           LOGIN WITH GITHUB
