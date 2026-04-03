@@ -19,7 +19,6 @@ const Navbar = () => {
     borderRadius: "8px",
     cursor: "pointer",
     fontSize: "1rem",
-    margin: "20px",
   };
 
   const navStyle = {
@@ -54,7 +53,7 @@ const Navbar = () => {
       </div>
 
       <div>
-        <span> style={{marginRight: "10px"}} Welcome, {user.username}</span>
+        <span>Welcome, {user.username} </span>
         {showDashboardButton && (
           <Link to="/">
             <button style={buttonStyle}>DASHBOARD</button>
