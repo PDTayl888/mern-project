@@ -43,9 +43,10 @@ const ChannelCard = ({ card, onDelete, onUpdate }) => {
             onChange={handleChange}
           />
           <input
-            type="text"
+            type="url"
             name="youTubeUrl"
             value={editData.youTubeUrl}
+            pattern=".*youtube\.com.*|.*youtu\.be.*"
             onChange={handleChange}
           />
           <input
