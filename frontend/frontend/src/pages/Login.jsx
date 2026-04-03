@@ -24,8 +24,6 @@ const Login = () => {
     }
   }, [searchParams, navigate]);
 
-  //TODO: SHOW TEH USER AN ERROR MESSAGE!!
-
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -42,55 +40,61 @@ const Login = () => {
   };
 
   return (
-    <main className="test-page">
-      <h1>Log in:</h1>
+    <main style={pageStyle}>
+      <div style={formStyle}>
+        <h1>Log in:</h1>
 
-      {errorMsg && <div>{errorMsg}</div>}
+        {errorMsg && <div>{errorMsg}</div>}
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          name="email"
-          placeholder="email address"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
-        <button type="submit">login</button>
-      </form>
+        <form onSubmit={handleSubmit}>
+          <input
+            style={inputStyle}
+            type="email"
+            name="email"
+            placeholder="email address"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+          <input
+            style={inputStyle}
+            type="password"
+            name="password"
+            placeholder="password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
+          <button type="submit" style={buttonStyle}>
+            login
+          </button>
+        </form>
 
-      <div>
-        <p>
-          <Link to="/register">click here to register!</Link>
-        </p>
-      </div>
+        <div>
+          <p>
+            <Link to="/register">click here to register!</Link>
+          </p>
+        </div>
 
-      <div>
-        <hr />
-        <span>OR</span>
-        <hr />
-      </div>
+        <div>
+          <hr />
+          <span>OR</span>
+          <hr />
+        </div>
 
-      <div>
-        <button
-          onClick={() =>
-            (window.location.href =
-              "https://mern-project-41xe.onrender.com/api/users/auth/github")
-          }
-        >
-          LOGIN WITH GITHUB
-        </button>
+        <div>
+          <button
+            style={buttonStyle}
+            onClick={() =>
+              (window.location.href =
+                "https://mern-project-41xe.onrender.com/api/users/auth/github")
+            }
+          >
+            LOGIN WITH GITHUB
+          </button>
+        </div>
       </div>
     </main>
   );
 };
 export default Login;
-//https://mern-project-41xe.onrender.com/api/users/auth/github/callback
