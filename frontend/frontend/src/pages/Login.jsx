@@ -3,6 +3,46 @@ import { useNavigate, useSearchParams, Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 const Login = () => {
+  const pageStyle = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    minHeight: "80vh",
+    backgroundColor: "#1a2a3a",
+    color: "white",
+  };
+
+  const formStyle = {
+    display: "flex",
+    flexDirection: "column",
+    backgroundColor: "#008080",
+    padding: "30px",
+    borderRadius: "15px",
+    boxShadow: "0 10px 25px rgba(0,0,0,0.5)",
+    width: "100%",
+    maxWidth: "320px",
+  };
+  const inputStyle = {
+    padding: "8px 10px",
+    marginBottom: "12px",
+    borderRadius: "8px",
+    border: "2px solid #00e5ff",
+    backgroundColor: "#1a2a3a",
+    color: "white",
+    fontSize: "1.1rem",
+  };
+  const buttonStyle = {
+    backgroundColor: "#00e5ff",
+    color: "#1a2a3a",
+    border: "none",
+    padding: "12px",
+    borderRadius: "8px",
+    fontWeight: "bold",
+    cursor: "pointer",
+    fontSize: "1rem",
+  };
+
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
 
@@ -42,7 +82,7 @@ const Login = () => {
   return (
     <main style={pageStyle}>
       <div style={formStyle}>
-        <h1>Log in:</h1>
+        <h2>Log in:</h2>
 
         {errorMsg && <div>{errorMsg}</div>}
 
@@ -77,9 +117,7 @@ const Login = () => {
         </div>
 
         <div>
-          <hr />
           <span>OR</span>
-          <hr />
         </div>
 
         <div>
