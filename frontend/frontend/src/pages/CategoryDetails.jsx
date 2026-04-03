@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import ChannelCard from "../components/ChannelCard";
 import { fetchClient as fetch } from "../utils/apiClient";
-import CategoryItem from "../components/CategoryItem";
 
 const CategoryDetails = () => {
     const gridContainerStyle = {
@@ -19,7 +18,7 @@ const CategoryDetails = () => {
     border: "3px solid #f57dd7",
   };
   const { categoryId } = useParams();
-  const navigate = useNavigate();
+
 
   const {
     data: cards,

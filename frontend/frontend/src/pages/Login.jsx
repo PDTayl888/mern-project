@@ -83,7 +83,7 @@ const Login = () => {
         <button
           onClick={() =>
             (window.location.href =
-              "http://localhost:5000/api/users/auth/github")
+              "https://yt-subscript.onrender.com/api/users/auth/github")
           }
         >
           LOGIN WITH GITHUB
