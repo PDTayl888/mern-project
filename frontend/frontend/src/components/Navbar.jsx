@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import logo from "../assets/image (2).png";
+import logo from "../assets/Blue gradient logo with play button.png";
 
 const Navbar = () => {
   const logoStyle = {
@@ -56,7 +56,7 @@ const Navbar = () => {
         <span>Welcome, {user.username}</span>
         {showDashboardButton && (
           <Link to="/">
-            <button>DASHBOARD</button>
+            <button style={buttonStyle}>DASHBOARD</button>
           </Link>
         )}
         <button onClick={logout} style={buttonStyle}>Logout</button>
