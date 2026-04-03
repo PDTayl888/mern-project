@@ -1,12 +1,12 @@
 import { createContext, useState, useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
-import { fetchClient } from './../utils/apiClient';
+import { fetchClient } from "./../utils/apiClient";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
 
@@ -28,18 +28,18 @@ export const AuthProvider = ({ children }) => {
     initAuth();
   }, []);
 
-const login = async (email, password) => {
+  const login = async (email, password) => {
     try {
       const data = await fetchClient("/api/users/login", {
         method: "POST",
         body: JSON.stringify({ email, password }),
       });
       localStorage.setItem("token", data.token);
-      setUser(data.user); 
+      setUser(data.user);
       return data;
     } catch (error) {
       console.error("Login failed", error);
-      throw error; 
+      throw error;
     }
   };
 
@@ -56,7 +56,7 @@ const login = async (email, password) => {
   const logout = () => {
     localStorage.removeItem("token");
     setUser(null);
-    window.location.href = "/login";
+    navigate("/login");
     //maybe the navigate way, try them both!!!!
     //navigate('/login');
   };
