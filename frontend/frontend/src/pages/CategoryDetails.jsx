@@ -110,6 +110,7 @@ const CategoryDetails = () => {
 
       <form onSubmit={handleAddCard}>
         <input
+          style={inputStyle}
           placeholder="Channel Name"
           value={newCard.channelName}
           onChange={(e) =>
