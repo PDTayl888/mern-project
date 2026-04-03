@@ -16,9 +16,9 @@ const Dashboard = () => {
     backgroundColor: "#00e5ff",
     color: "#1a2a3a",
     border: "none",
-    padding: "12px",
+    padding: "7px",
+    margin: "1.5px",
     borderRadius: "8px",
-    fontWeight: "bold",
     cursor: "pointer",
     fontSize: "1rem",
   };
