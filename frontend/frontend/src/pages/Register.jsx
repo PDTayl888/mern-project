@@ -72,7 +72,7 @@ const Register = () => {
   return (
     <main style={pageStyle}>
       <div style={formStyle}>
-        <h1>create sub_script_ account here!</h1>
+        <h3>create sub_script_ account here!</h3>
 
         {errorMsg && <div>{errorMsg}</div>}
 

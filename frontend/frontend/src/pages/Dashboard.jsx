@@ -12,6 +12,18 @@ const Dashboard = () => {
     padding: "20px",
   };
 
+    const inputStyle = {
+    padding: "8px 10px",
+    marginBottom: "12px",
+    borderRadius: "8px",
+    border: "2px solid #00e5ff",
+    backgroundColor: "#1a2a3a",
+    color: "white",
+    fontSize: "1.1rem",
+  };
+
+
+
   const buttonStyle = {
     backgroundColor: "#00e5ff",
     color: "#1a2a3a",
@@ -86,6 +98,7 @@ const Dashboard = () => {
       <section>
         <form onSubmit={handleCreateCategory}>
           <input
+          style={inputStyle}
             type="text"
             placeholder="CATEGORY NAME"
             value={newCategoryName}
@@ -93,6 +106,7 @@ const Dashboard = () => {
             required
           />
           <textarea
+          style={inputStyle}
             placeholder="DESCRIPTION"
             value={newCategoryDescription}
             onChange={(e) => setNewCategoryDescription(e.target.value)}

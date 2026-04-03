@@ -22,6 +22,16 @@ const CategoryItem = ({ category, onDelete, onUpdate }) => {
     fontSize: "1rem",
   };
 
+  const inputStyle = {
+    padding: "8px 10px",
+    marginBottom: "12px",
+    borderRadius: "8px",
+    border: "2px solid #00e5ff",
+    backgroundColor: "#1a2a3a",
+    color: "white",
+    fontSize: "1.1rem",
+  };
+
   const nameStyle = {
     color: "#1c456e",
     textAlign: "center",
@@ -63,10 +73,26 @@ const CategoryItem = ({ category, onDelete, onUpdate }) => {
     <li style={categoryStyle}>
       {isEditing ? (
         <div>
-          <input type="text" value={editName} onChange={handleEditName} />
-          <input type="text" value={editDesc} onChange={handleEditDesc} />
-          <button style={buttonStyle} onClick={handleSave}>save</button>
-          <button style={buttonStyle} onClick={handleCancel}>cancel</button>
+          <input
+            style={inputStyle}
+            placeholder="CATEGORY NAME"
+            type="text"
+            value={editName}
+            onChange={handleEditName}
+          />
+          <input
+            style={inputStyle}
+            placeholder="DESCRIPTION"
+            type="text"
+            value={editDesc}
+            onChange={handleEditDesc}
+          />
+          <button style={buttonStyle} onClick={handleSave}>
+            save
+          </button>
+          <button style={buttonStyle} onClick={handleCancel}>
+            cancel
+          </button>
         </div>
       ) : (
         <div>
@@ -77,8 +103,12 @@ const CategoryItem = ({ category, onDelete, onUpdate }) => {
             {category?.description || "NO DESCRIPTION AVAILABLE "}
           </p>
 
-          <button style={buttonStyle} onClick={() => setIsEditing(true)}>Edit Text</button>
-          <button style={buttonStyle} onClick={() => onDelete(category._id)}>Delete</button>
+          <button style={buttonStyle} onClick={() => setIsEditing(true)}>
+            Edit Text
+          </button>
+          <button style={buttonStyle} onClick={() => onDelete(category._id)}>
+            Delete
+          </button>
         </div>
       )}
     </li>

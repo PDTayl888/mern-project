@@ -8,7 +8,7 @@ const ChannelCard = ({ card, onDelete, onUpdate }) => {
     borderRadius: "12px",
     padding: "15px",
   };
-    const buttonStyle = {
+  const buttonStyle = {
     backgroundColor: "#00e5ff",
     color: "#1a2a3a",
     border: "none",
@@ -19,9 +19,18 @@ const ChannelCard = ({ card, onDelete, onUpdate }) => {
     fontSize: "1rem",
   };
 
+  const inputStyle = {
+    padding: "8px 10px",
+    marginBottom: "12px",
+    borderRadius: "8px",
+    border: "2px solid #00e5ff",
+    backgroundColor: "#1a2a3a",
+    color: "white",
+    fontSize: "1.1rem",
+  };
 
   const linkStyle = {
-   color: "#4a148c",
+    color: "#4a148c",
     fontWeight: "bold",
     textDecoration: "underline",
     wordBreak: "break-all",
@@ -58,12 +67,14 @@ const ChannelCard = ({ card, onDelete, onUpdate }) => {
       {isEditing ? (
         <form onSubmit={handleSave}>
           <input
+            style={inputStyle}
             type="text"
             name="channelName"
             value={editData.channelName}
             onChange={handleChange}
           />
           <input
+            style={inputStyle}
             type="url"
             name="youTubeUrl"
             value={editData.youTubeUrl}
@@ -72,6 +83,7 @@ const ChannelCard = ({ card, onDelete, onUpdate }) => {
             title="Please enter valid URL"
           />
           <input
+            style={inputStyle}
             type="text"
             placeholder="description"
             name="description"
@@ -79,8 +91,12 @@ const ChannelCard = ({ card, onDelete, onUpdate }) => {
             onChange={handleChange}
           />
 
-          <button style={buttonStyle} type="submit">save changes</button>
-          <button style={buttonStyle} type="button" onClick={handleCancel}>cancel</button>
+          <button style={buttonStyle} type="submit">
+            save changes
+          </button>
+          <button style={buttonStyle} type="button" onClick={handleCancel}>
+            cancel
+          </button>
         </form>
       ) : (
         <div>
@@ -88,11 +104,12 @@ const ChannelCard = ({ card, onDelete, onUpdate }) => {
 
           {card.youTubeUrl ? (
             <p>
-              <a 
-              href={card.youTubeUrl} 
-              target="_blank" 
-              rel="noreferrer"
-              style={linkStyle}>
+              <a
+                href={card.youTubeUrl}
+                target="_blank"
+                rel="noreferrer"
+                style={linkStyle}
+              >
                 {card.youTubeUrl}
               </a>
             </p>
@@ -112,8 +129,12 @@ const ChannelCard = ({ card, onDelete, onUpdate }) => {
               <option value="Archived">Archived</option>
             </select>
           </div>
-          <button style={buttonStyle} onClick={() => setIsEditing(true)}>Edit Text</button>
-          <button style={buttonStyle} onClick={() => onDelete(card._id)}>Remove</button>
+          <button style={buttonStyle} onClick={() => setIsEditing(true)}>
+            Edit Text
+          </button>
+          <button style={buttonStyle} onClick={() => onDelete(card._id)}>
+            Remove
+          </button>
         </div>
       )}
     </div>

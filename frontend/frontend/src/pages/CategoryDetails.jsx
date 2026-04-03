@@ -24,6 +24,16 @@ const CategoryDetails = () => {
     fontSize: "1rem",
   };
 
+  const inputStyle = {
+    padding: "8px 10px",
+    marginBottom: "12px",
+    borderRadius: "8px",
+    border: "2px solid #00e5ff",
+    backgroundColor: "#1a2a3a",
+    color: "white",
+    fontSize: "1.1rem",
+  };
+
   const pageStyle = {
     backgroundColor: "#205992",
     border: "3px solid #f57dd7",
@@ -108,6 +118,7 @@ const CategoryDetails = () => {
           required
         />
         <input
+          style={inputStyle}
           type="url"
           placeholder="https://youtube.com/..."
           value={newCard.youTubeUrl}
@@ -118,6 +129,7 @@ const CategoryDetails = () => {
           title="enter valid YouTube URL"
         />
         <input
+          style={inputStyle}
           placeholder="description"
           value={newCard.description}
           onChange={(e) =>
