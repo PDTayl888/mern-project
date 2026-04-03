@@ -12,3 +12,5 @@ const connectDB = async () => {
 };
 
 module.exports = connectDB;
+
+//https://mern-project-41xe.onrender.com//api/auth/github/callback
