@@ -5,7 +5,7 @@ import ChannelCard from "../components/ChannelCard";
 import { fetchClient as fetch } from "../utils/apiClient";
 
 const CategoryDetails = () => {
-    const gridContainerStyle = {
+  const gridContainerStyle = {
     display: "flex",
     flexWrap: "wrap",
     gap: "20px",
@@ -13,12 +13,22 @@ const CategoryDetails = () => {
     padding: "20px",
   };
 
-  const pageTest = {
+  const buttonStyle = {
+    backgroundColor: "#00e5ff",
+    color: "#1a2a3a",
+    border: "none",
+    padding: "12px",
+    borderRadius: "8px",
+    fontWeight: "bold",
+    cursor: "pointer",
+    fontSize: "1rem",
+  };
+
+  const pageStyle = {
     backgroundColor: "#205992",
     border: "3px solid #f57dd7",
   };
   const { categoryId } = useParams();
-
 
   const {
     data: cards,
@@ -83,10 +93,9 @@ const CategoryDetails = () => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div style={pageTest}>
-
+    <div style={pageStyle}>
       <h1>{currentCategory?.name?.toUpperCase()}</h1>
-     
+
       <h2>CHANNELS</h2>
 
       <form onSubmit={handleAddCard}>
@@ -117,7 +126,9 @@ const CategoryDetails = () => {
           required
         />
 
-        <button type="submit">Add Channel</button>
+        <button type="submit" style={buttonStyle}>
+          Add Channel
+        </button>
       </form>
 
       <ul style={gridContainerStyle}>

@@ -12,6 +12,17 @@ const Dashboard = () => {
     padding: "20px",
   };
 
+  const buttonStyle = {
+    backgroundColor: "#00e5ff",
+    color: "#1a2a3a",
+    border: "none",
+    padding: "12px",
+    borderRadius: "8px",
+    fontWeight: "bold",
+    cursor: "pointer",
+    fontSize: "1rem",
+  };
+
   const pageTest = {
     backgroundColor: "#205992",
     border: "3px solid #74a1d4",
@@ -87,7 +98,9 @@ const Dashboard = () => {
             onChange={(e) => setNewCategoryDescription(e.target.value)}
             rows="2"
           />
-          <button type="submit">CREATE CATEGORY</button>
+          <button type="submit" style={buttonStyle}>
+            CREATE CATEGORY
+          </button>
         </form>
       </section>
 

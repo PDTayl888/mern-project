@@ -8,7 +8,17 @@ const Navbar = () => {
     height: "190px",
     width: "auto",
     display: "block",
-    borderRadius: "10px"
+    borderRadius: "10px",
+  };
+  const buttonStyle = {
+    backgroundColor: "#00e5ff",
+    color: "#1a2a3a",
+    border: "none",
+    padding: "12px",
+    borderRadius: "8px",
+    fontWeight: "bold",
+    cursor: "pointer",
+    fontSize: "1rem",
   };
 
   const navStyle = {
@@ -27,7 +37,6 @@ const Navbar = () => {
     display: "flex",
     alignItems: "center",
   };
-
 
   const { user, logout } = useContext(AuthContext);
   const location = useLocation();
@@ -50,7 +59,7 @@ const Navbar = () => {
             <button>DASHBOARD</button>
           </Link>
         )}
-        <button onClick={logout}>Logout</button>
+        <button onClick={logout} style={buttonStyle}>Logout</button>
       </div>
     </header>
   );

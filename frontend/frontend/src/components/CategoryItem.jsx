@@ -11,6 +11,24 @@ const CategoryItem = ({ category, onDelete, onUpdate }) => {
     margin: "0 auto",
     lineHeight: "1.4",
   };
+  const buttonStyle = {
+    backgroundColor: "#00e5ff",
+    color: "#1a2a3a",
+    border: "none",
+    padding: "12px",
+    borderRadius: "8px",
+    fontWeight: "bold",
+    cursor: "pointer",
+    fontSize: "1rem",
+  };
+
+  const nameStyle = {
+    color: "#1c456e",
+    textAlign: "center",
+    fontSize: "2.5rem",
+    margin: "20px 0",
+  };
+
   const categoryStyle = {
     backgroundColor: "#30cdcd",
     color: "#6e2fc5",
@@ -47,18 +65,20 @@ const CategoryItem = ({ category, onDelete, onUpdate }) => {
         <div>
           <input type="text" value={editName} onChange={handleEditName} />
           <input type="text" value={editDesc} onChange={handleEditDesc} />
-          <button onClick={handleSave}>save</button>
-          <button onClick={handleCancel}>cancel</button>
+          <button style={buttonStyle} onClick={handleSave}>save</button>
+          <button style={buttonStyle} onClick={handleCancel}>cancel</button>
         </div>
       ) : (
         <div>
           <Link to={`/categories/${category._id}`}>
-            <h3>{category.name}</h3>
+            <h3 style={nameStyle}>{category?.name?.toUpperCase()}</h3>
           </Link>
-          <p style={descStyle}>{category?.description || "NO DESCRIPTION AVAILABLE "}</p>
+          <p style={descStyle}>
+            {category?.description || "NO DESCRIPTION AVAILABLE "}
+          </p>
 
-          <button onClick={() => setIsEditing(true)}>Edit Text</button>
-          <button onClick={() => onDelete(category._id)}>Delete</button>
+          <button style={buttonStyle} onClick={() => setIsEditing(true)}>Edit Text</button>
+          <button style={buttonStyle} onClick={() => onDelete(category._id)}>Delete</button>
         </div>
       )}
     </li>

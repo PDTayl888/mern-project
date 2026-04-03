@@ -8,9 +8,20 @@ const ChannelCard = ({ card, onDelete, onUpdate }) => {
     borderRadius: "12px",
     padding: "15px",
   };
+    const buttonStyle = {
+    backgroundColor: "#00e5ff",
+    color: "#1a2a3a",
+    border: "none",
+    padding: "12px",
+    borderRadius: "8px",
+    fontWeight: "bold",
+    cursor: "pointer",
+    fontSize: "1rem",
+  };
+
 
   const linkStyle = {
-   color: "#1d0c36",
+   color: "#4a148c",
     fontWeight: "bold",
     textDecoration: "underline",
     wordBreak: "break-all",
@@ -68,8 +79,8 @@ const ChannelCard = ({ card, onDelete, onUpdate }) => {
             onChange={handleChange}
           />
 
-          <button type="submit">save changes</button>
-          <button type="button" onClick={handleCancel}>cancel</button>
+          <button style={buttonStyle} type="submit">save changes</button>
+          <button style={buttonStyle} type="button" onClick={handleCancel}>cancel</button>
         </form>
       ) : (
         <div>
@@ -101,8 +112,8 @@ const ChannelCard = ({ card, onDelete, onUpdate }) => {
               <option value="Archived">Archived</option>
             </select>
           </div>
-          <button onClick={() => setIsEditing(true)}>Edit Text</button>
-          <button onClick={() => onDelete(card._id)}>Remove</button>
+          <button style={buttonStyle} onClick={() => setIsEditing(true)}>Edit Text</button>
+          <button style={buttonStyle} onClick={() => onDelete(card._id)}>Remove</button>
         </div>
       )}
     </div>
