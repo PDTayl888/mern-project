@@ -1,4 +1,4 @@
-const BASE_URL = import.meta.env.VITE_API_URL || "https://mern-project-41xe.onrender.com/";
+const BASE_URL = import.meta.env.VITE_API_URL || "https://yt-subscript.onrender.com";
 
 export const fetchClient = async (endpoint, customConfig = {}) => {
   const token = localStorage.getItem("token");
