@@ -95,6 +95,7 @@ const Login = () => {
             placeholder="email address"
             value={formData.email}
             onChange={handleChange}
+            autoComplete="off"
             required
           />
           <input
@@ -104,6 +105,7 @@ const Login = () => {
             placeholder="password"
             value={formData.password}
             onChange={handleChange}
+            autoComplete="new-password"
             required
           />
           <button type="submit" style={buttonStyle}>

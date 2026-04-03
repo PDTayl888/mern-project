@@ -84,6 +84,7 @@ const Register = () => {
             placeholder="username"
             value={formData.username}
             onChange={handleChange}
+            autoComplete="off"
             required
           />
           <input
@@ -93,6 +94,7 @@ const Register = () => {
             placeholder="email address"
             value={formData.email}
             onChange={handleChange}
+            autoComplete="off"
             required
           />
           <input
@@ -102,6 +104,7 @@ const Register = () => {
             placeholder="password"
             value={FormData.password}
             onChange={handleChange}
+            autoComplete="new-password"
             required
           />
           <button type="submit" style={buttonStyle}>
