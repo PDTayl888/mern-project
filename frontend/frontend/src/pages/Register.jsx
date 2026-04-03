@@ -82,7 +82,7 @@ const Register = () => {
             type="text"
             name="username"
             placeholder="username"
-            value={FormData.username}
+            value={formData.username}
             onChange={handleChange}
             required
           />
@@ -91,7 +91,7 @@ const Register = () => {
             type="email"
             name="email"
             placeholder="email address"
-            value={FormData.email}
+            value={formData.email}
             onChange={handleChange}
             required
           />
