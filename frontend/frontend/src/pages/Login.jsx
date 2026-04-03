@@ -16,13 +16,13 @@ const Login = () => {
 
     if (token) {
       localStorage.setItem("token", token);
-      window.location.href = "/";
+      navigate("/");
     }
 
     if (error) {
       console.log(error);
     }
-  }, [searchParams]);
+  }, [searchParams, navigate]);
 
   //TODO: SHOW TEH USER AN ERROR MESSAGE!!
 
