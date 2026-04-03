@@ -6,7 +6,16 @@ const ChannelCard = ({ card, onDelete, onUpdate }) => {
     color: "#6e2fc5",
     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)",
     borderRadius: "12px",
+    padding: "15px",
   };
+
+  const linkStyle = {
+   color: "#1d0c36",
+    fontWeight: "bold",
+    textDecoration: "underline",
+    wordBreak: "break-all",
+  };
+
   const [isEditing, setIsEditing] = useState(false);
   const [editData, setEditData] = useState({
     channelName: card.channelName,
@@ -68,7 +77,11 @@ const ChannelCard = ({ card, onDelete, onUpdate }) => {
 
           {card.youTubeUrl ? (
             <p>
-              <a href={card.youTubeUrl} target="_blank" rel="noreferrer">
+              <a 
+              href={card.youTubeUrl} 
+              target="_blank" 
+              rel="noreferrer"
+              style={linkStyle}>
                 {card.youTubeUrl}
               </a>
             </p>

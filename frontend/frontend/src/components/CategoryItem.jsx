@@ -2,6 +2,15 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const CategoryItem = ({ category, onDelete, onUpdate }) => {
+  const descStyle = {
+    display: "-webkit-box",
+    WebkitBoxOrient: "vertical",
+    overflow: "hidden",
+    WebkitLineClamp: 3,
+    maxWidth: "40ch",
+    margin: "0 auto",
+    lineHeight: "1.4",
+  };
   const categoryStyle = {
     backgroundColor: "#30cdcd",
     color: "#6e2fc5",
@@ -46,7 +55,7 @@ const CategoryItem = ({ category, onDelete, onUpdate }) => {
           <Link to={`/categories/${category._id}`}>
             <h3>{category.name}</h3>
           </Link>
-          <p>{category?.description || "NO DESCRIPTION AVAILABLE "}</p>
+          <p style={descStyle}>{category?.description || "NO DESCRIPTION AVAILABLE "}</p>
 
           <button onClick={() => setIsEditing(true)}>Edit Text</button>
           <button onClick={() => onDelete(category._id)}>Delete</button>
