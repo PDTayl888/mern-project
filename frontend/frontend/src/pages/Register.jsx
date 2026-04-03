@@ -111,7 +111,7 @@ const Register = () => {
 
         <div>
           <p>
-            HAVE AN ACCOUNT?<Link to="/login">LOG IN HERE</Link>
+            HAVE AN ACCOUNT? <Link to="/login">LOG IN HERE</Link>
           </p>
         </div>
 
