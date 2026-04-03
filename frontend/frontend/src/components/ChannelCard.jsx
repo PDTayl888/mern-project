@@ -18,7 +18,8 @@ const ChannelCard = ({ card, onDelete, onUpdate }) => {
     setEditData({ ...editData, [e.target.name]: e.target.value });
   };
 
-  const handleSave = () => {
+  const handleSave = (e) => {
+    e.preventDefault();
     onUpdate(card._id, editData);
     setIsEditing(false);
   };
@@ -35,7 +36,7 @@ const ChannelCard = ({ card, onDelete, onUpdate }) => {
   return (
     <div style={cardStyle}>
       {isEditing ? (
-        <div>
+        <form onSubmit={handleSave}>
           <input
             type="text"
             name="channelName"
@@ -48,6 +49,7 @@ const ChannelCard = ({ card, onDelete, onUpdate }) => {
             value={editData.youTubeUrl}
             pattern=".*youtube\.com.*|.*youtu\.be.*"
             onChange={handleChange}
+            title="Please enter valid URL"
           />
           <input
             type="text"
@@ -57,9 +59,9 @@ const ChannelCard = ({ card, onDelete, onUpdate }) => {
             onChange={handleChange}
           />
 
-          <button onClick={handleSave}>save changes</button>
-          <button onClick={handleCancel}>cancel</button>
-        </div>
+          <button type="submit">save changes</button>
+          <button type="button" onClick={handleCancel}>cancel</button>
+        </form>
       ) : (
         <div>
           <h3>{card.channelName}</h3>
