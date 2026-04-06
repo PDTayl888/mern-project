@@ -49,7 +49,7 @@ const CategoryItem = ({ category, onDelete, onUpdate }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editName, setEditName] = useState(category.name);
   const [editDesc, setEditDesc] = useState(category.description);
-
+  
   const handleEditName = (e) => {
     setEditName(e.target.value);
   };

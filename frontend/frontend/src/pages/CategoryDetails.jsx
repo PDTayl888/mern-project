@@ -5,39 +5,6 @@ import ChannelCard from "../components/ChannelCard";
 import { fetchClient as fetch } from "../utils/apiClient";
 
 const CategoryDetails = () => {
-  const gridContainerStyle = {
-    display: "flex",
-    flexWrap: "wrap",
-    gap: "20px",
-    justifyContent: "center",
-    padding: "20px",
-  };
-
-  const buttonStyle = {
-    backgroundColor: "#00e5ff",
-    color: "#1a2a3a",
-    border: "none",
-    padding: "7px",
-    margin: "1.5px",
-    borderRadius: "8px",
-    cursor: "pointer",
-    fontSize: "1rem",
-  };
-
-  const inputStyle = {
-    padding: "8px 10px",
-    marginBottom: "12px",
-    borderRadius: "8px",
-    border: "2px solid #00e5ff",
-    backgroundColor: "#1a2a3a",
-    color: "white",
-    fontSize: "1.1rem",
-  };
-
-  const pageStyle = {
-    backgroundColor: "#205992",
-    border: "3px solid #f57dd7",
-  };
   const { categoryId } = useParams();
 
   const {
@@ -50,6 +17,8 @@ const CategoryDetails = () => {
   const { data: categories, loading: catLoading } = useFetch(`/api/categories`);
 
   const currentCategory = categories?.find((cat) => cat._id === categoryId);
+
+  const [showArchived, setShowArchived] = useState(false);
 
   const [newCard, setNewCard] = useState({
     channelName: "",
@@ -99,11 +68,59 @@ const CategoryDetails = () => {
     }
   };
 
-  const sortedCards = cards ? [...cards].sort((a, b) => {
-    if (a.status === "Watch Later" && b.status !== "Watch Later") return -1;
-    if (b.status === "Watch Later" && a.status !== "Watch Later") return 1;
-    return 0;
-  }) : [];
+  const sortedCards = cards
+    ? [...cards]
+        .filter((card) => showArchived || card.status !== "Archived")
+        .sort((a, b) => {
+          if (a.status === "Watch Later" && b.status !== "Watch Later")
+            return -1;
+          if (b.status === "Watch Later" && a.status !== "Watch Later")
+            return 1;
+          return 0;
+        })
+    : [];
+
+  const gridContainerStyle = {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "20px",
+    justifyContent: "center",
+    padding: "20px",
+  };
+
+  const buttonStyle = {
+    backgroundColor: "#00e5ff",
+    color: "#1a2a3a",
+    border: "none",
+    padding: "7px",
+    margin: "1.5px",
+    borderRadius: "8px",
+    cursor: "pointer",
+    fontSize: "1rem",
+  };
+  const archivedButtonStyle = {
+    backgroundColor: showArchived ? "#008080" : "transparent",
+    color: showArchived ? "white" : "#008080",
+    border: "2px solid #008080",
+    padding: "5px 10px",
+    borderRadius: "8px",
+    cursor: "pointer",
+    fontSize: "1rem",
+  };
+  const inputStyle = {
+    padding: "8px 10px",
+    marginBottom: "12px",
+    borderRadius: "8px",
+    border: "2px solid #00e5ff",
+    backgroundColor: "#1a2a3a",
+    color: "white",
+    fontSize: "1.1rem",
+  };
+
+  const pageStyle = {
+    backgroundColor: "#205992",
+    border: "3px solid #f57dd7",
+  };
 
   if (loading) return <p>LOADING...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -113,6 +130,12 @@ const CategoryDetails = () => {
       <h1>{currentCategory?.name?.toUpperCase()}</h1>
 
       <h2>CHANNELS</h2>
+      <button
+        onClick={() => setShowArchived(!showArchived)}
+        style={archivedButtonStyle}
+      >
+        {showArchived ? "hide archived" : "show archived"}
+      </button>
 
       <form onSubmit={handleAddCard}>
         <input
