@@ -99,6 +99,12 @@ const CategoryDetails = () => {
     }
   };
 
+  const sortedCards = cards ? [...cards].sort((a, b) => {
+    if (a.status === "Watch Later" && b.status !== "Watch Later") return -1;
+    if (b.status === "Watch Later" && a.status !== "Watch Later") return 1;
+    return 0;
+  }) : [];
+
   if (loading) return <p>LOADING...</p>;
   if (error) return <p>Error: {error}</p>;
 
@@ -145,8 +151,8 @@ const CategoryDetails = () => {
       </form>
 
       <ul style={gridContainerStyle}>
-        {cards && cards.length > 0 ? (
-          cards.map((card) => (
+        {sortedCards && sortedCards.length > 0 ? (
+          sortedCards.map((card) => (
             <ChannelCard
               key={card._id}
               card={card}
